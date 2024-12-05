@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Compras</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Gestão de Compras</h1>
+    <form id="productForm">
+      <input type="text" id="productCode" placeholder="Código do Produto (Opcional)">
+      <input type="text" id="productName" placeholder="Nome do Produto" required>
+      <button type="submit">Adicionar Produto</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="productTable">
+        <!-- Produtos serão inseridos aqui -->
+      </tbody>
+    </table>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
