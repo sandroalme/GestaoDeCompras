@@ -7,6 +7,8 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  query,
+  orderBy,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 
 // Configuração do Firebase
@@ -25,7 +27,9 @@ const productsCollection = collection(db, "products");
 
 // Função para carregar os produtos na tabela
 async function loadProducts() {
-  const querySnapshot = await getDocs(productsCollection);
+  const q = query(productsCollection, orderBy("timestamp", "asc")); // Ordena do mais antigo para o mais recente
+  const querySnapshot = await getDocs(q);
+
   const productTable = document.getElementById("productTable");
   productTable.innerHTML = "";
 
@@ -75,7 +79,14 @@ async function addProduct(event) {
     return;
   }
 
-  await addDoc(productsCollection, { code, name, ticked: false });
+  // Adiciona um timestamp ao produto
+  await addDoc(productsCollection, {
+    code,
+    name,
+    ticked: false,
+    timestamp: new Date(), // Adiciona a data e hora
+  });
+
   document.getElementById("productCode").value = "";
   document.getElementById("productName").value = "";
   loadProducts();
